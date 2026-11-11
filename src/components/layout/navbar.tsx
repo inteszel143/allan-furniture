@@ -9,9 +9,9 @@ import { ThemeToggle } from "../theme-toggle";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "About us", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Categories", href: "/categories" },
+  { label: "About us", href: "/about" },
   { label: "Contact us", href: "/contact" },
 ];
 
@@ -49,7 +49,6 @@ export function Navbar() {
             alt="Allan Furniture logo"
             width={56}
             height={56}
-            priority
             className="h-12 w-12 object-contain sm:h-14 sm:w-14"
           />
           <span className="hidden text-sm font-bold leading-tight text-amber-950 dark:text-amber-100 min-[420px]:block sm:text-base">

@@ -1,14 +1,31 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { ProductImageViewer } from "../../../components/products/product-image-viewer";
 import { catalogProducts } from "../../../lib/catalog";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export function generateStaticParams() {
+  return catalogProducts.map((product) => ({ slug: product.slug }));
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
+  return (
+    <Suspense fallback={<ProductLoading />}>
+      <ProductContent params={params} />
+    </Suspense>
+  );
+}
+
+function ProductLoading() {
+  return <main className="min-h-[70vh] flex-1 animate-pulse bg-zinc-50 dark:bg-zinc-950" aria-label="Loading product" />;
+}
+
+async function ProductContent({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = catalogProducts.find((item) => item.slug === slug);
   if (!product) notFound();
@@ -18,9 +35,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="mx-auto max-w-6xl">
         <Link href="/products" className="inline-flex items-center text-xs font-semibold text-zinc-600 transition hover:text-amber-900 dark:text-zinc-400 dark:hover:text-amber-300"><ArrowLeft aria-hidden="true" className="mr-2 h-4 w-4" />Back to products</Link>
         <div className="mt-6 grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:gap-12">
-          <div className="relative min-h-[55vh] overflow-hidden rounded-3xl bg-zinc-100 p-3 dark:bg-zinc-900 sm:p-6 md:min-h-[72vh]">
-            <Image src={product.image} alt={product.name} fill priority sizes="(max-width: 767px) 100vw, 60vw" className="object-contain p-3 sm:p-6" />
-          </div>
+          <ProductImageViewer image={product.image} alt={product.name} />
           <div className="flex flex-col justify-center">
             <Link href={`/categories/${product.category}`} className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-800 hover:underline dark:text-amber-300">{product.categoryName}</Link>
             <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{product.name}</h1>

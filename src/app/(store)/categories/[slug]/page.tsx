@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { ProductCard } from "../../../../components/products/product-card";
 import { catalogProducts, productCategories } from "../../../../lib/catalog";
 
@@ -7,7 +8,23 @@ type CategoryPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export function generateStaticParams() {
+  return productCategories.map((category) => ({ slug: category.slug }));
+}
+
+export default function CategoryPage({ params }: CategoryPageProps) {
+  return (
+    <Suspense fallback={<CategoryLoading />}>
+      <CategoryContent params={params} />
+    </Suspense>
+  );
+}
+
+function CategoryLoading() {
+  return <main className="min-h-[70vh] flex-1 animate-pulse bg-zinc-50 dark:bg-zinc-950" aria-label="Loading category" />;
+}
+
+async function CategoryContent({ params }: CategoryPageProps) {
   const { slug } = await params;
   const category = productCategories.find((item) => item.slug === slug);
   if (!category) notFound();

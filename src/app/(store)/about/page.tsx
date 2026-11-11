@@ -15,13 +15,13 @@ export default function AboutPage() {
       <section className="bg-zinc-50 py-12 dark:bg-zinc-900/40 sm:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-2 md:items-center lg:px-8">
           <div className="relative min-h-72 overflow-hidden rounded-3xl bg-zinc-200 shadow-xl dark:bg-zinc-800 sm:min-h-[420px]">
-            <Image src={aboutAllanImage} alt="Allan Furniture shop" fill priority sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" />
+            <Image src={aboutAllanImage} alt="Allan Furniture shop" fill loading="eager" sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" />
           </div>
           <div className="md:py-8 md:pl-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-800 dark:text-amber-300">About Allan Furniture</p>
             <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">Furniture that makes your house feel like home</h1>
             <p className="mt-5 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
-              Allan Furniture Shop &amp; Display Center helps families find furniture for comfortable, welcoming homes. Browse our dining sets, chairs, beds, and doors, or visit our Tagum City showroom to see the collection in person.
+              Allan Furniture Shop &amp; Display Center helps families find furniture for comfortable, welcoming homes. Browse our dining sets, chairs, beds, doors, and sala sets, or visit our Tagum City showroom to see the collection in person.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/products" className="inline-flex h-11 items-center rounded-full bg-zinc-950 px-5 text-sm font-semibold text-white transition hover:bg-amber-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-200">Explore furniture <ArrowUpRight aria-hidden="true" className="ml-2 h-4 w-4" /></Link>

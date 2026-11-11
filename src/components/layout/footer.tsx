@@ -28,7 +28,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-zinc-800">
-        <p className="mx-auto max-w-7xl px-4 py-4 text-xs text-zinc-500 sm:px-6 lg:px-8">© {new Date().getFullYear()} Allan Furniture. All rights reserved.</p>
+        <p className="mx-auto max-w-7xl px-4 py-4 text-xs text-zinc-500 sm:px-6 lg:px-8">© Allan Furniture. All rights reserved.</p>
       </div>
     </footer>
   );

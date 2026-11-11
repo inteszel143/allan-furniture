@@ -89,12 +89,19 @@ import door46 from "../assets/mock-door/741901407_1443524617800928_6373143067039
 import door47 from "../assets/mock-door/742208849_1443524371134286_8887724549662351373_n.jpg";
 import door48 from "../assets/mock-door/742267192_1443524101134313_490663979599979952_n.jpg";
 import door49 from "../assets/mock-door/742301185_1443523854467671_1880111001961738689_n.jpg";
+import sala01 from "../assets/mock-salaset/793203729_1495157132637676_4485243290493585297_n.jpg";
+import sala02 from "../assets/mock-salaset/799201047_1504450318375024_2640167085447143838_n.jpg";
+import sala03 from "../assets/mock-salaset/806337380_1504450415041681_3927942769217633782_n.jpg";
+import sala04 from "../assets/mock-salaset/806397508_1504449515041771_2978364990947900169_n.jpg";
+import sala05 from "../assets/mock-salaset/806397520_1504451215041601_5243155396835568212_n.jpg";
+import sala06 from "../assets/mock-salaset/806453633_1504450388375017_67557369787042958_n.jpg";
+import sala07 from "../assets/mock-salaset/807889708_1504451201708269_8636106144358683168_n.jpg";
 
 export type CatalogProduct = {
   name: string;
   slug: string;
   image: StaticImageData;
-  category: "dining-sets" | "chairs" | "beds" | "doors";
+  category: "dining-sets" | "chairs" | "beds" | "doors" | "sala-sets";
   categoryName: string;
 };
 
@@ -109,6 +116,8 @@ const bedImages = [bed01, bed02, bed03, bed04, bed05, bed06, bed07, bed08, bed09
 const doorImages = [
   door01, door02, door03, door04, door05, door06, door07, door08, door09, door10, door11, door12, door13, door14, door15, door16, door17, door18, door19, door20, door21, door22, door23, door24, door25, door26, door27, door28, door29, door30, door31, door32, door33, door34, door35, door36, door37, door38, door39, door40, door41, door42, door43, door44, door45, door46, door47, door48, door49
 ];
+
+const salaImages = [sala01, sala02, sala03, sala04, sala05, sala06, sala07];
 
 export const catalogProducts: CatalogProduct[] = [
   ...diningImages.map((image, index) => ({
@@ -139,6 +148,13 @@ export const catalogProducts: CatalogProduct[] = [
     category: "doors" as const,
     categoryName: "Doors",
   })),
+  ...salaImages.map((image, index) => ({
+    name: `Sala Set ${String(index + 1).padStart(2, "0")}`,
+    slug: `sala-set-${String(index + 1).padStart(2, "0")}`,
+    image,
+    category: "sala-sets" as const,
+    categoryName: "Sala Sets",
+  })),
 ];
 
 export const productCategories = [
@@ -153,7 +169,7 @@ export const productCategories = [
     name: "Chairs",
     slug: "chairs",
     description: "A range of chairs to bring comfort and character to your home.",
-    image: chair01,
+    image: chair08,
     count: chairImages.length,
   },
   {
@@ -167,7 +183,14 @@ export const productCategories = [
     name: "Doors",
     slug: "doors",
     description: "Browse door styles for the finishing touch to your home.",
-    image: door01,
+    image: door27,
     count: doorImages.length,
+  },
+  {
+    name: "Sala Sets",
+    slug: "sala-sets",
+    description: "Explore sofas and sala sets for relaxing and gathering at home.",
+    image: sala01,
+    count: salaImages.length,
   },
 ];

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Search } from "lucide-react";
 import { ProductCard } from "../../components/products/product-card";
 import { catalogProducts, productCategories } from "../../lib/catalog";
@@ -7,7 +8,29 @@ type ProductsPageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+export default function ProductsPage({ searchParams }: ProductsPageProps) {
+  return (
+    <Suspense fallback={<ProductsLoading />}>
+      <ProductsContent searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+function ProductsLoading() {
+  return (
+    <main className="flex-1 bg-white px-4 py-12 dark:bg-zinc-950 sm:py-16">
+      <div className="mx-auto max-w-7xl animate-pulse sm:px-2 lg:px-4">
+        <div className="h-9 w-64 rounded-lg bg-zinc-200 dark:bg-zinc-800" />
+        <div className="mt-4 h-5 max-w-xl rounded bg-zinc-100 dark:bg-zinc-900" />
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 8 }, (_, index) => <div key={index} className="aspect-[4/3] rounded-2xl bg-zinc-100 dark:bg-zinc-900" />)}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+async function ProductsContent({ searchParams }: ProductsPageProps) {
   const params = await searchParams;
   const category = typeof params.category === "string" ? params.category : undefined;
   const q = typeof params.q === "string" ? params.q : undefined;
@@ -27,7 +50,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-800 dark:text-amber-300">Our collection</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{selectedCategory?.name ?? "Furniture for your home"}</h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-              Browse our current dining sets, chairs, beds, and doors. Contact us for pricing, availability, and help choosing the right piece.
+              Browse our current dining sets, chairs, beds, doors, and sala sets. Contact us for pricing, availability, and help choosing the right piece.
             </p>
           </div>
           <form action="/products" className="flex h-11 w-full items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-4 md:max-w-sm dark:border-zinc-700 dark:bg-zinc-900">
