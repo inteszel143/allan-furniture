@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Funnel_Display, Geist_Mono } from "next/font/google";
 import { Navbar } from "../components/layout/navbar";
+import { Footer } from "../components/layout/footer";
+import { MessengerFab } from "../components/layout/messenger-fab";
 import "./globals.css";
 
 const funnelDisplay = Funnel_Display({
@@ -28,6 +30,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <Footer />
+        <MessengerFab />
       </body>
     </html>
   );
