@@ -62,7 +62,30 @@ export function FeaturedCarousel() {
       }}
     >
       <div className="relative min-h-64 flex-1 overflow-hidden rounded-3xl bg-zinc-100 shadow-xl shadow-zinc-950/10 ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
-        {slides.map((slide, index) => (
+        <div
+          className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${activeIndex === 0 ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          aria-hidden={activeIndex !== 0}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`1 of ${slides.length}: ${slides[0].label}`}
+        >
+          <Image
+            src={slides[0].src}
+            alt={slides[0].alt}
+            fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1279px) 55vw, 760px"
+            loading="eager"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+          <p className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-black/30 px-4 py-2 text-xs font-semibold text-white backdrop-blur-sm sm:bottom-7 sm:left-7 sm:text-sm">
+            {slides[0].label}
+          </p>
+        </div>
+        {slides.slice(1).map((slide, offset) => {
+          const index = offset + 1;
+
+          return (
           <div
             key={slide.label}
             className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${index === activeIndex ? "opacity-100" : "pointer-events-none opacity-0"}`}
@@ -76,7 +99,7 @@ export function FeaturedCarousel() {
               alt={slide.alt}
               fill
               sizes="(max-width: 767px) 100vw, (max-width: 1279px) 55vw, 760px"
-              loading={index === 0 ? "eager" : "lazy"}
+              loading="lazy"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
@@ -84,7 +107,8 @@ export function FeaturedCarousel() {
               {slide.label}
             </p>
           </div>
-        ))}
+          );
+        })}
 
         <button
           type="button"

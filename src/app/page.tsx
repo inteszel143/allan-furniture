@@ -5,7 +5,15 @@ import { FeaturedCarousel } from "../components/home/featured-carousel";
 import aboutAllanImage from "../assets/mock-images/aboutAllan.jpg";
 import { catalogProducts, productCategories } from "../lib/catalog";
 
-const featuredProducts = catalogProducts.filter((product) => product.category === "dining-sets");
+const diningProducts = catalogProducts.filter((product) => product.category === "dining-sets");
+const productCount = catalogProducts.length;
+const featuredProducts = productCategories
+  .map((category) =>
+    category.slug === "doors"
+      ? catalogProducts.find((product) => product.slug === "door-40")
+      : catalogProducts.find((product) => product.category === category.slug),
+  )
+  .filter((product) => product !== undefined);
 
 const faqs = [
   {
@@ -29,89 +37,74 @@ const faqs = [
 export default function Home() {
   return (
     <main className="flex-1 bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
-      <section className="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-            Furniture that makes your house feel like home
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
-            Find comfortable, quality furniture for every room at Allan Furniture. Visit our Tagum
-            City showroom and discover pieces made for everyday living.
-          </p>
-          <Link
-            href="/products"
-            className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-zinc-950 px-6 text-sm font-semibold text-white transition hover:bg-amber-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-200"
-          >
-            Browse all products
-          </Link>
-        </div>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-[minmax(160px,0.28fr)_minmax(0,1fr)_minmax(180px,0.28fr)] lg:mt-14 lg:gap-6">
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-1 md:gap-4">
-            <article className="flex min-h-40 flex-col items-center justify-center rounded-3xl bg-zinc-950 px-4 py-6 text-center text-white shadow-lg shadow-zinc-950/10 sm:min-h-44 dark:bg-zinc-900">
-              <p className="text-3xl font-bold tracking-tight">100%</p>
-              <p className="mt-1 rounded-full bg-white/15 px-3 py-1 text-[10px] font-medium">
-                Customer satisfaction
+      <section className="overflow-hidden bg-[#f8f6f2] px-4 pb-12 pt-10 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-amber-900 dark:text-amber-300">
+                <span className="h-px w-7 bg-amber-800 dark:bg-amber-300" /> Allan Furniture · Tagum City
               </p>
-              <p className="mt-3 max-w-48 text-[10px] leading-4 text-zinc-300">
-                Quality furniture and thoughtful service for your home.
+              <h1 className="text-3xl font-bold leading-[1.08] tracking-tight sm:text-4xl lg:text-5xl">
+                Furniture that makes your house feel like <span className="text-amber-900 dark:text-amber-300">home.</span>
+              </h1>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:text-base">
+                Find comfortable, quality furniture for every room. Visit our showroom and discover pieces made for everyday living.
               </p>
-            </article>
-
-            <article className="flex min-h-36 flex-col items-center justify-center rounded-3xl border border-zinc-200/70 bg-zinc-50 px-4 py-5 text-center dark:border-zinc-800 dark:bg-zinc-900 sm:min-h-40">
-              <p className="text-2xl font-bold tracking-tight sm:text-3xl">+28,000</p>
-              <p className="mt-2 rounded-full bg-white px-3 py-1 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-                Happy customers
-              </p>
-            </article>
+            </div>
+            <div className="flex shrink-0 flex-wrap gap-3">
+              <Link
+                href="/products"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-zinc-950 px-5 text-sm font-semibold text-white transition hover:bg-amber-900 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-200"
+              >
+                Browse products <ArrowUpRight aria-hidden="true" size={16} />
+              </Link>
+              <Link
+                href="#contact"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-zinc-300 px-5 text-sm font-semibold transition hover:border-amber-900 hover:text-amber-900 dark:border-zinc-700 dark:hover:border-amber-300 dark:hover:text-amber-300"
+              >
+                Visit our showroom
+              </Link>
+            </div>
           </div>
 
-          <FeaturedCarousel />
+          <div className="grid gap-4 md:grid-cols-[minmax(145px,0.24fr)_minmax(0,1fr)_minmax(175px,0.27fr)] lg:gap-5">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-1 md:gap-4">
+              <article className="flex min-h-32 flex-col justify-center rounded-3xl bg-zinc-950 px-4 py-5 text-white shadow-lg shadow-zinc-950/10 sm:min-h-40 sm:px-5 dark:bg-zinc-900">
+                <p className="text-3xl font-bold tracking-tight sm:text-4xl">{productCategories.length}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-amber-200">Furniture categories</p>
+                <p className="mt-3 text-xs leading-5 text-zinc-300">Find pieces for dining, living, and bedroom spaces.</p>
+              </article>
 
-          <aside className="flex flex-col gap-3 md:gap-4">
-            <div className="flex items-center justify-between gap-2 rounded-2xl border border-zinc-200/70 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900">
-              <div>
-                <p className="text-sm font-bold">4.8/5 <span className="font-normal text-zinc-500 dark:text-zinc-400">customer rating</span></p>
-                <div className="flex text-zinc-950 dark:text-amber-300" role="img" aria-label="Rated 4.8 out of 5">
-                  {Array.from({ length: 5 }, (_, index) => (
-                    <Star key={index} aria-hidden="true" className="h-3 w-3 fill-current" />
-                  ))}
+              <article className="flex min-h-32 flex-col justify-center rounded-3xl border border-zinc-200 bg-white/80 px-4 py-5 sm:min-h-36 sm:px-5 dark:border-zinc-800 dark:bg-zinc-900">
+                <p className="text-2xl font-bold tracking-tight sm:text-3xl">{productCount}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">Items to explore</p>
+                <Link href="/products" className="mt-3 inline-flex items-center text-xs font-semibold text-amber-900 hover:underline dark:text-amber-300">
+                  View collection <ArrowUpRight aria-hidden="true" className="ml-1 h-3.5 w-3.5" />
+                </Link>
+              </article>
+            </div>
+            <FeaturedCarousel />
+
+            <aside className="flex flex-col gap-3 rounded-3xl border border-zinc-200/80 bg-white/80 p-3 dark:border-zinc-800 dark:bg-zinc-900 sm:p-4">
+              <div className="relative min-h-40 flex-1 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800">
+                <Image
+                  src={diningProducts[5].image}
+                  alt="Wood dining set from the Allan Furniture collection"
+                  fill
+                  sizes="(max-width: 767px) 100vw, 220px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pb-4 pt-10 text-white">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-200">Made for gathering</p>
+                  <p className="mt-1 text-sm font-semibold">Find a favorite for your home</p>
                 </div>
               </div>
-              <Link
-                href="/products"
-                aria-label="Explore furniture"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-zinc-950 text-white transition hover:bg-amber-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-200"
-              >
-                <ArrowUpRight aria-hidden="true" size={17} />
-              </Link>
-            </div>
-
-            <div className="relative min-h-36 flex-1 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
-              <Image
-                src={featuredProducts[5].image}
-                alt="Wood dining set from the Allan Furniture collection"
-                fill
-                sizes="(max-width: 767px) 100vw, 220px"
-                className="object-cover"
-              />
-            </div>
-
-            <div>
-              <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                Discover thoughtfully selected furniture designed for comfort, quality, and
-                everyday living.
-              </p>
-              <Link
-                href="/products"
-                className="mt-3 inline-flex h-10 items-center justify-center rounded-full bg-zinc-950 px-5 text-sm font-semibold text-white transition hover:bg-amber-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-amber-200"
-              >
-                Shop now
-              </Link>
-            </div>
-          </aside>
+              <a href="https://maps.google.com/?q=Allan+Furniture+Shop+%26+Display+Center%2C+Tagum+City" className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-xs font-semibold transition hover:border-amber-900 hover:text-amber-900 dark:border-zinc-700 dark:hover:border-amber-300 dark:hover:text-amber-300">
+                <MapPin aria-hidden="true" size={14} /> Get directions
+              </a>
+            </aside>
+          </div>
         </div>
-
       </section>
 
       <section id="featured-products" className="scroll-mt-20 border-t border-zinc-100 bg-zinc-50/70 py-12 dark:border-zinc-800 dark:bg-zinc-900/30 sm:py-16">
@@ -120,8 +113,8 @@ export default function Home() {
             <div>
               <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">Featured Products</h2>
               <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                Explore dining sets from our current collection. Browse the photos, then contact us
-                for pricing, availability, and help choosing a piece for your home.
+                A few highlights from across our collection, from dining and living room pieces to
+                bedroom furniture and more. Contact us for current pricing and availability.
               </p>
             </div>
             <Link
@@ -132,7 +125,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-5">
             {featuredProducts.map((product) => (
               <Link
                 key={product.name}
@@ -151,7 +144,7 @@ export default function Home() {
                 <div className="flex items-center justify-between gap-2 p-3 sm:p-4">
                   <div>
                     <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">
-                      Dining
+                      {product.categoryName}
                     </p>
                     <h3 className="mt-1 text-sm font-semibold sm:text-base">{product.name}</h3>
                   </div>
@@ -254,7 +247,7 @@ export default function Home() {
             <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">Visit our Tagum City showroom or get in touch with our team about products, availability, and delivery.</p>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <a href="https://maps.google.com/?q=Purok+Bautista+Mankilam+Tagum+City" className="rounded-2xl border border-zinc-200 p-5 transition hover:border-amber-800/50 dark:border-zinc-800"><MapPin className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" /><h3 className="mt-3 text-sm font-semibold">Visit our showroom</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">Purok Bautista, near Saint Genevieve Hospital and Radyo ni Juan, along Barangay Mankilam Highway, Tagum City.</p></a>
+            <a href="https://maps.google.com/?q=Allan+Furniture+Shop+%26+Display+Center%2C+Tagum+City" className="rounded-2xl border border-zinc-200 p-5 transition hover:border-amber-800/50 dark:border-zinc-800 dark:hover:border-amber-300"><MapPin className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" /><h3 className="mt-3 text-sm font-semibold">Visit our showroom</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">Purok Bautista, near Saint Genevieve Hospital and Radyo ni Juan, along Barangay Mankilam Highway, Tagum City.</p></a>
             <a href="tel:+639951031561" className="rounded-2xl border border-zinc-200 p-5 transition hover:border-amber-800/50 dark:border-zinc-800"><Phone className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" /><h3 className="mt-3 text-sm font-semibold">Call us</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">0995-103-1561<br />0977-233-1342</p></a>
             <a href="mailto:maryannlanguban2@gmail.com" className="rounded-2xl border border-zinc-200 p-5 transition hover:border-amber-800/50 dark:border-zinc-800"><Mail className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" /><h3 className="mt-3 text-sm font-semibold">Email us</h3><p className="mt-2 break-all text-sm leading-6 text-zinc-600 dark:text-zinc-400">maryannlanguban2@gmail.com</p></a>
           </div>
