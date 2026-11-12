@@ -20,7 +20,7 @@ const searchTargets = [
   { label: "About Allan Furniture", href: "/#about", keywords: "about story shop showroom" },
   { label: "Featured products", href: "/#featured-products", keywords: "products dining furniture shop" },
   { label: "Categories", href: "/#categories", keywords: "rooms living bedroom dining accents" },
-  { label: "Customer testimonials", href: "/#testimonials", keywords: "reviews rating customer feedback" },
+  { label: "Why shop with us", href: "/#testimonials", keywords: "showroom categories help furniture" },
   { label: "FAQ", href: "/#faq", keywords: "questions answers help" },
   { label: "Contact us", href: "/#contact", keywords: "contact call email address location" },
 ];

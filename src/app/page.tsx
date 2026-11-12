@@ -1,7 +1,8 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone, Star } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { FeaturedCarousel } from "../components/home/featured-carousel";
+import { WhileInView } from "../components/home/while-in-view";
 import aboutAllanImage from "../assets/mock-images/aboutAllan.jpg";
 import { catalogProducts, productCategories } from "../lib/catalog";
 
@@ -38,6 +39,7 @@ export default function Home() {
   return (
     <main className="flex-1 bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
       <section className="overflow-hidden bg-[#f8f6f2] px-4 pb-12 pt-10 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
+        <WhileInView>
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -105,9 +107,11 @@ export default function Home() {
             </aside>
           </div>
         </div>
+        </WhileInView>
       </section>
 
       <section id="featured-products" className="scroll-mt-20 border-t border-zinc-100 bg-zinc-50/70 py-12 dark:border-zinc-800 dark:bg-zinc-900/30 sm:py-16">
+        <WhileInView>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -154,9 +158,11 @@ export default function Home() {
             ))}
           </div>
         </div>
+        </WhileInView>
       </section>
 
       <section id="about" className="scroll-mt-20 border-t border-zinc-100 py-14 dark:border-zinc-800 sm:py-20">
+        <WhileInView>
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-2 md:items-center lg:px-8">
           <div className="relative min-h-64 overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 sm:min-h-80">
             <Image src={aboutAllanImage} alt="Allan Furniture shop" fill sizes="(max-width: 767px) 100vw, 50vw" className="object-cover" />
@@ -170,9 +176,11 @@ export default function Home() {
             <Link href="/about" className="mt-6 inline-flex h-10 items-center justify-center rounded-full border border-zinc-300 px-5 text-sm font-semibold transition hover:border-amber-800 hover:text-amber-800 dark:border-zinc-700 dark:hover:border-amber-300 dark:hover:text-amber-300">More about us <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" /></Link>
           </div>
         </div>
+        </WhileInView>
       </section>
 
       <section id="categories" className="scroll-mt-20 bg-zinc-50 py-14 dark:bg-zinc-900/40 sm:py-20">
+        <WhileInView>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -197,35 +205,45 @@ export default function Home() {
             ))}
           </div>
         </div>
+        </WhileInView>
       </section>
 
-      <section id="testimonials" className="scroll-mt-20 py-14 sm:py-20">
+      <section id="testimonials" className="scroll-mt-20 bg-[#f8f6f2] py-14 dark:bg-zinc-900/40 sm:py-20">
+        <WhileInView>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 rounded-3xl bg-zinc-950 p-7 text-white sm:p-10 md:grid-cols-[0.8fr_1.2fr] md:items-center lg:p-14 dark:bg-zinc-900">
+          <div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">Customer testimonials</p>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Made for homes, chosen by you</h2>
-              <p className="mt-3 text-sm leading-6 text-zinc-300">Every home is different. We love helping our customers find pieces they will enjoy living with every day.</p>
-              <Link href="/contact" className="mt-6 inline-flex h-10 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-zinc-950 transition hover:bg-amber-200">Share your experience</Link>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-900 dark:text-amber-300">A personal way to shop</p>
+              <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Find the right piece for your home</h2>
+              <p className="mt-3 max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-400">Explore the collection online, then visit us in Tagum City or get in touch with our team for help.</p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <article className="rounded-2xl bg-white/10 p-5 ring-1 ring-white/10">
-                <div className="flex text-amber-300" aria-label="5 out of 5 stars">{Array.from({ length: 5 }, (_, i) => <Star key={i} aria-hidden="true" className="h-4 w-4 fill-current" />)}</div>
-                <p className="mt-4 text-sm font-semibold">A welcoming showroom</p>
-                <p className="mt-2 text-sm leading-6 text-zinc-300">Come by, see the furniture for yourself, and find what feels right for your home.</p>
-                <p className="mt-4 text-xs text-zinc-400">A note from the Allan Furniture team</p>
-              </article>
-              <article className="flex flex-col justify-center rounded-2xl bg-amber-100 p-5 text-zinc-950 dark:bg-amber-200">
-                <p className="text-4xl font-bold tracking-tight">4.8<span className="text-xl">/5</span></p>
-                <div className="mt-2 flex text-amber-800" aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}</div>
-                <p className="mt-3 text-xs leading-5 text-zinc-700">Customer rating highlighted by Allan Furniture</p>
-              </article>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <a href="https://maps.google.com/?q=Allan+Furniture+Shop+%26+Display+Center%2C+Tagum+City" className="group rounded-2xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-1 hover:border-amber-800/50 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-amber-300/50">
+                <MapPin aria-hidden="true" className="h-5 w-5 text-amber-800 dark:text-amber-300" />
+                <h3 className="mt-5 text-sm font-semibold">See it in person</h3>
+                <p className="mt-2 text-xs leading-5 text-zinc-600 dark:text-zinc-400">Visit Allan Furniture Shop &amp; Display Center in Tagum City.</p>
+                <span className="mt-4 inline-flex items-center text-xs font-semibold text-amber-900 group-hover:underline dark:text-amber-300">Get directions <ArrowUpRight aria-hidden="true" className="ml-1 h-3.5 w-3.5" /></span>
+              </a>
+              <Link href="#categories" className="group rounded-2xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-1 hover:border-amber-800/50 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-amber-300/50">
+                <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-amber-800 dark:text-amber-300" />
+                <h3 className="mt-5 text-sm font-semibold">Explore every room</h3>
+                <p className="mt-2 text-xs leading-5 text-zinc-600 dark:text-zinc-400">Browse dining, bedroom, living room, and other pieces.</p>
+                <span className="mt-4 inline-flex items-center text-xs font-semibold text-amber-900 group-hover:underline dark:text-amber-300">Shop by category <ArrowUpRight aria-hidden="true" className="ml-1 h-3.5 w-3.5" /></span>
+              </Link>
+              <Link href="/contact" className="group rounded-2xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-1 hover:border-amber-800/50 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-amber-300/50">
+                <Phone aria-hidden="true" className="h-5 w-5 text-amber-800 dark:text-amber-300" />
+                <h3 className="mt-5 text-sm font-semibold">Talk with our team</h3>
+                <p className="mt-2 text-xs leading-5 text-zinc-600 dark:text-zinc-400">Ask about current pricing, availability, or delivery.</p>
+                <span className="mt-4 inline-flex items-center text-xs font-semibold text-amber-900 group-hover:underline dark:text-amber-300">Contact us <ArrowUpRight aria-hidden="true" className="ml-1 h-3.5 w-3.5" /></span>
+              </Link>
             </div>
           </div>
         </div>
+        </WhileInView>
       </section>
 
       <section id="faq" className="scroll-mt-20 bg-zinc-50 py-14 dark:bg-zinc-900/40 sm:py-20">
+        <WhileInView>
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-[0.7fr_1.3fr] lg:px-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-800 dark:text-amber-300">FAQ</p>
@@ -237,9 +255,11 @@ export default function Home() {
             {faqs.map(({ question, answer }) => <details key={question} className="group py-5"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold marker:hidden">{question}<span className="text-lg text-amber-800 transition group-open:rotate-45 dark:text-amber-300">+</span></summary><p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">{answer}</p></details>)}
           </div>
         </div>
+        </WhileInView>
       </section>
 
       <section id="contact" className="scroll-mt-20 border-t border-zinc-100 py-14 dark:border-zinc-800 sm:py-20">
+        <WhileInView>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-800 dark:text-amber-300">Contact us</p>
@@ -252,6 +272,7 @@ export default function Home() {
             <a href="mailto:maryannlanguban2@gmail.com" className="rounded-2xl border border-zinc-200 p-5 transition hover:border-amber-800/50 dark:border-zinc-800"><Mail className="h-5 w-5 text-amber-800 dark:text-amber-300" aria-hidden="true" /><h3 className="mt-3 text-sm font-semibold">Email us</h3><p className="mt-2 break-all text-sm leading-6 text-zinc-600 dark:text-zinc-400">maryannlanguban2@gmail.com</p></a>
           </div>
         </div>
+        </WhileInView>
       </section>
     </main>
   );
